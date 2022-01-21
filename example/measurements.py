@@ -13,7 +13,7 @@ import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn'
 
 #   For DPDL
-sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode')
+sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode\DPML')
 from DPDL import *
 import torch
 import copy

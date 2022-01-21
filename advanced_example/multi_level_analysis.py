@@ -2,6 +2,10 @@
 #---    Initialization
 #///////////////////////////////////////////
 # %%--  Imports
+import sys
+sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode\DPML')
+from Si import *
+sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode')
 from DPML import *
 import numpy as np
 import matplotlib.pyplot as plt
