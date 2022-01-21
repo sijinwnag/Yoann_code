@@ -4,7 +4,7 @@
 # %%--  Imports
 import sys
 # import the function file from another folder:
-sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import *
 from main import *
 from utils import *
@@ -13,7 +13,7 @@ import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn'
 
 #   For DPDL
-sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
 from DPDL import *
 import torch
 import copy
@@ -73,7 +73,7 @@ PARAMETERS = {
 #///////////////////////////////////////////
 # %%--  Define experiment and generate defect database
 exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS)
-sys.path.append(r'C:\Users\sijin wang\Desktop\TOR_dell\literature_review\yoanncode')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
 exp.loadCSV(FilePath=FILEPATH,Temperature=TEMPERATURE,Doping=DOPING, Type=WAFERTYPE)
 exp.interpolateSRH()
 exp.plotSRH()
