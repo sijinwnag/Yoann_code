@@ -112,7 +112,7 @@ class ML():
         '''
         #   define and update training parameters:
         trainParam={
-            'validation_fraction': 0.01,    # validation dataset percentage
+            'validation_fraction': 0.1,    # validation dataset percentage
             'normalize': True,     # Wether or not to normalize the input data (True for NN)
             'base_model': RandomForestRegressor(n_estimators=128, n_jobs=-1, verbose=1),
             'random_seed': np.random.randint(1000),
@@ -222,7 +222,7 @@ class ML():
         '''
         #   define and update training parameters:
         trainParam={
-            'validation_fraction': 0.01,    # validation dataset percentage
+            'validation_fraction': 0.1,    # validation dataset percentage
             'normalize': True,     # Wether or not to normalize the input data (Must be True for NN)
             'base_model': MLPClassifier((1024,128),alpha=0.001, activation = 'relu', learning_rate='adaptive', verbose=1),
             'random_seed': np.random.randint(1000),
