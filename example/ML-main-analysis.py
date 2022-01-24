@@ -68,7 +68,7 @@ PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML': False,   #   Log the output of the console to a text file
-    'n_defects': 1000, # Size of simulated defect data set for machine learning
+    'n_defects': 8000, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
     'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
     'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on
@@ -86,8 +86,8 @@ exp.generateDB() # generate the lifetime data for the given experiment
 # %%-
 
 # %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
-for modelName,model in ML_REGRESSION_PIPELINE.items():
-    ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName})
+for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learning model and corresponding hyper parameters.
+    ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName}) # use newML method defined in class experiment to set a maching learning ID.
     for trainKey in exp.parameters['regression_training_keys']:
         targetCol, bandgapParam = trainKey.rsplit('_',1)
         param={'bandgap':bandgapParam,'non-feature_col':PARAMETERS['non-feature_col'],'base_model':model}
