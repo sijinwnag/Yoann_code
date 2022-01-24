@@ -1,4 +1,7 @@
 "Experimental main functions"
+import sys
+# import the function file from another folder:
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import Cell,Defect,LTS
 from main import ML
 from utils.matplotlibstyle import *
@@ -13,7 +16,9 @@ import matplotlib.pyplot as plt
 import warnings
 # warnings.filterwarnings("ignore")
 
-class Experiment():
+# define a class in python (sth new):
+# check out the video: https://www.programiz.com/python-programming/class
+class Experiment(): # define a new class
     #****   constant declaration    ****#
     DefaultParameters = {
         'name':"",  # string added to every saved file for reference
@@ -30,7 +35,7 @@ class Experiment():
         'noise_parameter':0, #Parameter used to vary noise level from noise model
         'check_auger':True,     #   Check if lifetime generation should be below Auger limit
 
-    }
+    } # define default parameters
 
     #****   general methods     ****#
     def __init__(self,SaveDir,Parameters=None):
@@ -44,10 +49,10 @@ class Experiment():
             Outputs:
                 None
         '''
-        #   Check applicability of method
+        #   Check applicability of method: if there is no file to save the data, raise an error.
         if not os.path.exists(SaveDir): raise ValueError('%s does not exists'%(SaveDir))
 
-        #   Create directory for computation on this dataset
+        #   Create directory (folders) for computation on this dataset # this line define the directories
         self.pathDic = {
             'savedir':      SaveDir,
             'figures':      SaveDir+"\\figures\\",
@@ -55,6 +60,7 @@ class Experiment():
             'traces':       SaveDir+"\\traces\\",
             'outputs':      SaveDir+"\\outputs\\",
         }
+        # make the directory (folders)
         for key, value in self.pathDic.items():
                 if key in ['figures','objects','traces','outputs']:
                     if not os.path.exists(value):   os.makedirs(value)
@@ -64,7 +70,7 @@ class Experiment():
         self.logbook = {'created': datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")}
         self.logDataset = None
         self.logML = None
-        if Parameters is not None: self.updateParameters(Parameters)
+        if Parameters is not None: self.updateParameters(Parameters) # there is parameter input, use the input one
     def loadExp(path,filename=None):
         '''
         ---Doc---

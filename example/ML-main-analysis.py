@@ -2,9 +2,12 @@
 #---    Initialization
 #///////////////////////////////////////////
 # %%--  Imports
-from DPML.si import *
-from DPML.main import *
-from DPML.utils import *
+import sys
+# import the function file from another folder:
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+from Si import *
+from main import *
+from utils import *
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
@@ -35,11 +38,12 @@ from sklearn.neural_network import MLPClassifier, MLPRegressor
 # %%-
 
 # %%--  Inputs
-SAVEDIR = "savedir_example\\"
-TEMPERATURE = [200,250,300,350,400]
-DOPING = [1e15,1e15,1e15,1e15,1e15]
-WAFERTYPE = 'p'
-NAME = 'Main'
+SAVEDIR = "savedir_example\\" # create a folder that save the output for DPML
+TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation
+DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation
+WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
+NAME = 'Main' # Name of the experiment.
+
 #   File specific inputs
 ML_REGRESSION_PIPELINE={
     "Random Forest": RandomForestRegressor(n_estimators=100, verbose =2, n_jobs=-1),
@@ -48,6 +52,7 @@ ML_REGRESSION_PIPELINE={
     "Neural Network": MLPRegressor((100,100),alpha=0.001, activation = 'relu',verbose=2,learning_rate='adaptive'),
     "Support Vector": SVR(kernel='rbf',C=5,verbose=2, gamma="auto"),
 }
+# the hyper parameters for regression models
 ML_CLASSIFICATION_PIPELINE={
     "Random Forest": RandomForestClassifier(n_estimators=100, verbose =2,n_jobs=-1),
     "Adaptive Boosting": AdaBoostClassifier(base_estimator = DecisionTreeClassifier(), n_estimators=10),
@@ -55,17 +60,18 @@ ML_CLASSIFICATION_PIPELINE={
     "Neural Network": MLPClassifier((100,100),alpha=0.001, activation = 'relu',verbose=2,learning_rate='adaptive'),
     "Nearest Neighbors":KNeighborsClassifier(n_neighbors = 5, weights='distance',n_jobs=-1),
 }
+# the hyper parameters for classification models
 # %%-
 
-# %%--  Hyper-parameters
+# %%--  Hyper-parameters of the experiment
 PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML': False,   #   Log the output of the console to a text file
     'n_defects': 1000, # Size of simulated defect data set for machine learning
-    'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on
-    'classification_training_keys': ['bandgap_all'], # for  prediction
-    'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction
+    'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
+    'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
+    'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on
     'non-feature_col':['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap'] # columns to remove from dataframe in ML training
 }
 # %%-
@@ -74,12 +80,12 @@ PARAMETERS = {
 #---    Script
 #///////////////////////////////////////////
 # %%--  Define experiment and generate defect database
-exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS)
-exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING})
-exp.generateDB()
+exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS) # define an experiment by defining its save direction and the experiment parameters.
+exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING}) # set the wafer type, temperature, and the doping levels of the experiments.
+exp.generateDB() # generate the lifetime data for the given experiment
 # %%-
 
-# %%--  Train machine learning algorithms loop
+# %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
 for modelName,model in ML_REGRESSION_PIPELINE.items():
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName})
     for trainKey in exp.parameters['regression_training_keys']:
