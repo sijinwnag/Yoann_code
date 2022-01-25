@@ -39,8 +39,8 @@ from sklearn.neural_network import MLPClassifier, MLPRegressor
 
 # %%--  Inputs
 SAVEDIR = "savedir_example\\" # create a folder that save the output for DPML
-TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation
-DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation
+TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation (units are in K)
+DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation (units are in cm3)
 WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
 NAME = 'Main' # Name of the experiment.
 
@@ -86,14 +86,14 @@ exp.generateDB() # generate the lifetime data for the given experiment
 # %%-
 
 # %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
-for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learning model and corresponding hyper parameters.
+for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learning model and corresponding hyper parameters, this for loop is doing regression only
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName}) # use newML method defined in class experiment to set a maching learning ID.
     for trainKey in exp.parameters['regression_training_keys']:
         targetCol, bandgapParam = trainKey.rsplit('_',1)
         param={'bandgap':bandgapParam,'non-feature_col':PARAMETERS['non-feature_col'],'base_model':model}
         ml.trainRegressor(targetCol=targetCol, trainParameters=param)
         ml.plotRegressor(trainKey, plotParameters={'scatter_c':'black'})
-for modelName,model in ML_CLASSIFICATION_PIPELINE.items():
+for modelName,model in ML_CLASSIFICATION_PIPELINE.items(): # this for loop is doing classification.
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName})
     for trainKey in exp.parameters['classification_training_keys']:
         targetCol, bandgapParam = trainKey.rsplit('_',1)
