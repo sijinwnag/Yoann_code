@@ -38,6 +38,7 @@ class Experiment(): # define a new class
     } # define default parameters
 
     #****   general methods     ****#
+    # __init__ is what exp will go through
     def __init__(self,SaveDir,Parameters=None):
         '''
         ---Doc---
@@ -71,6 +72,7 @@ class Experiment(): # define a new class
         self.logDataset = None
         self.logML = None
         if Parameters is not None: self.updateParameters(Parameters) # there is parameter input, use the input one
+        # defein a method called: loadEXP to load the experiment.
     def loadExp(path,filename=None):
         '''
         ---Doc---
@@ -81,6 +83,7 @@ class Experiment(): # define a new class
             Outputs:
                 exp     Object
         '''
+        # if there is a file name: load the object of the input filename.
         if filename != None:
             exp = LoadObj(path,filename)
             exp.updateLogbook('Experiment_loaded_'+filename)
@@ -88,18 +91,19 @@ class Experiment(): # define a new class
         else:   # if no filename provided, take the latest one, if none exists, raise error.
             current_timestamp = datetime.datetime(1990, 10, 24, 16, 00, 00)
             for file in os.scandir(path):
-                if not file.is_file(): continue
-                if 'experimentObj' in file.name:
+                if not file.is_file(): continue # if there is no filename or latest experiment object, continue
+                if 'experimentObj' in file.name: # if there is latest experiment object, load the latest experiment.
                     timestamp = datetime.datetime.strptime(file.name.split("_")[-1].split(".")[0],"%Y-%m-%d-%H-%M-%S")
                     if timestamp > current_timestamp:
                         filename = file.name
-                        current_timestamp=timestamp
-            if filename != None:
+                        current_timestamp=timestamp # definine the filename we are loading (if there is a previous experiment object.)
+            if filename != None: # check again if we have input a file name or not.
                 exp = LoadObj(path,filename)
                 exp.updateLogbook('Experiment_loaded_'+filename)
                 return(exp)
-            else:
+            else: # if we do not have a file name or previous experiment, raise error.
                 raise ValueError("No experimental file exists in %s"%(path))
+    # define a method to save the experiment.
     def saveExp(self, name=None):
         '''
         ---Doc---
@@ -110,14 +114,17 @@ class Experiment(): # define a new class
             Outputs:
                 None
         '''
+        # if there is no spesified name from the input, use the default name in parameters.
         if name == None: name = self.parameters['name']
         # if self.logML !=None:
         #     for id,ML in self.logML:
         #         savePath=
         self.updateLogbook('Experiment_saved_'+name)
+        # use the save function we defined before to save the object in the right path and add a time in the file name.
         SaveObj(self,self.pathDic['objects'],'experimentObj_'+name+"_"+datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
     #****   machine learning methods     ****#
+    # define a function for machine learning methods.
     def newML(self, datasetID=None, mlParameters=None):
         '''
         ---Doc---
@@ -129,21 +136,21 @@ class Experiment(): # define a new class
             Outputs:
                 mlID     string mlID of newly created object
         '''
-        if self.logDataset == None : raise ValueError("Experiment doesn't have simulated data.")
+        if self.logDataset == None : raise ValueError("Experiment doesn't have simulated data.") # check if we have simulated data for ML
         if datasetID==None: datasetID = str(len(self.logDataset)-1) # use latest if not defined
-        if not isinstance(datasetID,str): datasetID = str(datasetID)
-        mlParam = {'name':None,'save':None,'logML':None}
-        if mlParameters!=None:
-            for key in mlParameters.keys(): mlParam[key]=mlParameters[key]
-        if mlParam['save']==None: mlParam['save']=self.parameters['save']
-        if mlParam['logML']==None: mlParam['logML']=self.parameters['logML']
-        if self.logML==None:
+        if not isinstance(datasetID,str): datasetID = str(datasetID) # not really sure what this line is doing ?????????????????????????????????
+        mlParam = {'name':None,'save':None,'logML':None} # create a mlParam dictionary to start with.
+        if mlParameters!=None: # if there is machine learning parameters input:
+            for key in mlParameters.keys(): mlParam[key]=mlParameters[key] # we define the mlParam dictionary based on the input parameters.
+        if mlParam['save']==None: mlParam['save']=self.parameters['save'] # save is a boolean parameter, if true then we will save a copy of the printed log, the outputed model and data. # here if we do not recieve any input for 'save', just use the default value we defined in the class.
+        if mlParam['logML']==None: mlParam['logML']=self.parameters['logML'] # logML is a boolean input, if true then it will do Log copy of print to console into text file. This line is saying if we do not recieve any input for this, just use the defalut parameter we defined in the class.
+        if self.logML==None: # not sure what this line is doing ??????????????????????????????? seems sth to do with assigning machine learning ID.
             mlID = "0"
         else:
             mlID = str(len(self.logML))
-        if mlParam['name']==None:mlParam['name']= self.parameters['name']+"-#"+mlID
-        mlParam['mlID']=mlID
-        ml = ML(Dataset=self.logDataset[datasetID], SaveDir=self.pathDic['savedir'],Parameters=mlParam)
+        if mlParam['name']==None:mlParam['name']= self.parameters['name']+"-#"+mlID # if name is not spesified, use the default name and add the maching learning ID.
+        mlParam['mlID']=mlID # input the maching learning ID into the dictionary.
+        ml = ML(Dataset=self.logDataset[datasetID], SaveDir=self.pathDic['savedir'],Parameters=mlParam) # define a maching learning object
 
         #   Log change
         mlID=self.updateLogMLmodel(ml, logID=mlID)
@@ -194,14 +201,14 @@ class Experiment(): # define a new class
             Outputs:
                 None
         '''        #   Check for applicabiliy
-        if mlIDs == None: mlIDs = [str(i) for i in range(len(self.logML))]
-        if header == None: header = ['Et_eV','Sn_cm2','Sp_cm2','k','logSn','logSp','logk']
-        self.predictCsv = {}
-        for mlID in mlIDs:
-            ml = self.logML[mlID]
-            self.predictCsv[mlID]={}
+        if mlIDs == None: mlIDs = [str(i) for i in range(len(self.logML))] # if there is no Machine learning ID, take the ID from self.logML.
+        if header == None: header = ['Et_eV','Sn_cm2','Sp_cm2','k','logSn','logSp','logk'] # if there is not spesified header, use the default ones
+        self.predictCsv = {} # not sure what this is doing ???????????
+        for mlID in mlIDs: # for each maching learning ID.
+            ml = self.logML[mlID] # pick up the maching learning object corresponding to the maching learning ID.
+            self.predictCsv[mlID]={} # use the maching learning object to predict
             #   Create dataset feature vector
-            for trainKey, mlDic in ml.logTrain.items():
+            for trainKey, mlDic in ml.logTrain.items(): # not sure what this for loop is doing???????????????????????
                 vector = [t for key in self.expKeys for t in self.expDic[key]['tau_interp']]
                 if trainKey=='scaler': continue
                 targetCol, bandgapParam = trainKey.rsplit('_',1)
@@ -239,7 +246,7 @@ class Experiment(): # define a new class
             Inputs:
                 None
             Outputs:
-                None
+                None (the database are saved in the file Savedir_example/objects)
         '''
         # Generate Random defect database
         # this part will generate an array of defects objects with spesified N, Et range and S range and Nt.
@@ -274,7 +281,7 @@ class Experiment(): # define a new class
                 if skipDefect: continue
                 s = LTS(c,d,self.parameters['dn_range'],noise=self.parameters['noise_model'], noiseparam=self.parameters['noise_parameter'])
                 if self.parameters['check_auger']:  #if break auger limit, discard defect
-                    breakAuger,_ = s.checkAuger()
+                    breakAuger,_ = s.checkAuger() # what is Auger limit ?????????????????????????????
                     if breakAuger: skipDefect=True
                 if skipDefect: continue
                 for t,dn in zip(s.tauSRH_noise,s.dnrange):
@@ -301,7 +308,7 @@ class Experiment(): # define a new class
             SaveObj(ltsDF,self.pathDic['objects'],'ltsDF_ID'+ltsID+"_"+datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
             self.updateLogbook('lifetime_database_saved_ID'+ltsID)
 
-    def uploadDB(self, ltsDF):
+    def uploadDB(self, ltsDF): # upload the generated data into the save file directory
         ltsID = self.updateLogDataset(ltsDF)
         self.updateLogbook('lifetime_database_uploaded_ID'+ltsID)
         if self.parameters['save']:
