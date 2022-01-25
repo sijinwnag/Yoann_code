@@ -1,4 +1,7 @@
 "Main functions for DPML"
+import sys
+# import the function file from another folder:
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import Cell,Defect,LTS, Sah
 from main import ML
 from utils.matplotlibstyle import *
