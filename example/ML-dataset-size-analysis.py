@@ -2,11 +2,14 @@
 #---    Initialization
 #///////////////////////////////////////////
 # %%--  Imports
-from DPML.si import *
-from DPML.main import *
-from DPML.utils import *
+import sys
+# import the function file from another folder:
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+from Si import *
+from main import *
+from utils import *
 import numpy as np
-from DPML.utils.matplotlibstyle import *
+from utils.matplotlibstyle import *
 import matplotlib.pyplot as plt
 # %%-
 
@@ -36,7 +39,7 @@ DOPING = [1e15,1e15,1e15,1e15,1e15]
 WAFERTYPE = 'p'
 NAME = 'Dataset size dependecy'
 #   File specific inputs
-RANGE = np.logspace(2,5,100)
+RANGE = np.logspace(2,3,100)
 
 # %%-
 
@@ -45,7 +48,7 @@ PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML':False,   #   Log the output of the console to a text file
-    'n_defects': 100000, # Size of simulated defect data set for machine learning
+    'n_defects': 1000, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on
     'classification_training_keys': ['bandgap_all'], # for parameter prediction
     'regression_training_keys': ['logk_all'], # for parameter prediction
