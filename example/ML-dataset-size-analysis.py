@@ -38,8 +38,8 @@ TEMPERATURE = [200,250,300,350,400]
 DOPING = [1e15,1e15,1e15,1e15,1e15]
 WAFERTYPE = 'p'
 NAME = 'Dataset size dependecy'
-#   File specific inputs
-RANGE = np.logspace(2,3,100)
+#   File specific inputs: range is the range of the sample sizes
+RANGE = np.logspace(2,5,100)
 
 # %%-
 
@@ -48,7 +48,7 @@ PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML':False,   #   Log the output of the console to a text file
-    'n_defects': 1000, # Size of simulated defect data set for machine learning
+    'n_defects': 100000, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on
     'classification_training_keys': ['bandgap_all'], # for parameter prediction
     'regression_training_keys': ['logk_all'], # for parameter prediction
