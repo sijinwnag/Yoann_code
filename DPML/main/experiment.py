@@ -68,7 +68,7 @@ class Experiment(): # define a new class
 
         #   define hyper parameters for experiment
         self.parameters = Experiment.DefaultParameters
-        self.logbook = {'created': datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")}
+        self.logbook = {'created': datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")} 
         self.logDataset = None
         self.logML = None
         if Parameters is not None: self.updateParameters(Parameters) # there is parameter input, use the input one
