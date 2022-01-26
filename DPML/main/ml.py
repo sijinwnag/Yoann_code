@@ -42,8 +42,8 @@ class ML():
                 None
         '''
         #   Use default if not defined
-        self.parameters=ML.DefaultParameters
-        if Parameters is not None: self.updateParameters(Parameters)
+        self.parameters=ML.DefaultParameters # first define the parameters as default parameters.
+        if Parameters is not None: self.updateParameters(Parameters)  # if there is defined parameters, replace the default parameter with them
 
         #   Create directory for computation on this dataset
         self.pathDic = {
@@ -55,7 +55,7 @@ class ML():
         }
         for key, value in self.pathDic.items():
                 if key in ['figures','objects','traces','outputs']:
-                    if not os.path.exists(value):   os.makedirs(value)
+                    if not os.path.exists(value):   os.makedirs(value) # making the directory
         #   define hyper parameters for ML training
         self.dataset = Dataset.copy(deep=True)
         self.logTrain={}
