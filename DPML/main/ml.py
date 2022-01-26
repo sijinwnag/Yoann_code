@@ -1,4 +1,7 @@
 "Machine learning functions associated to SRH parameter extraction"
+import sys
+# import the function file from another folder:
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from utils.matplotlibstyle import *
 from utils import SaveObj, LoadObj
 from utils import Logger
@@ -58,10 +61,10 @@ class ML():
                     if not os.path.exists(value):   os.makedirs(value) # making the directory
         #   define hyper parameters for ML training
         self.dataset = Dataset.copy(deep=True)
-        self.logTrain={}
+        self.logTrain={} # log dictionary are mainly for debugging
         self.logger = None
         self.pathDic['logfile']=self.pathDic['traces']+datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")+"_"+self.parameters['name']+".txt"
-        if self.parameters['logML']: self.logger = Logger(self.pathDic['logfile'])
+        if self.parameters['logML']: self.logger = Logger(self.pathDic['logfile']) # if logML == True
 
         #   Print header for logfile
         if self.parameters['logML']: self.logger.open()
@@ -120,9 +123,9 @@ class ML():
             'non-feature_col':["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap','CMn','CPn','CMp','CPp'],
             #["Name","Et_eV_1","Sn_cm2_1","Sp_cm2_1",'k_1','logSn_1','logSp_1','logk_1','bandgap_1',"Et_eV_2","Sn_cm2_2","Sp_cm2_2",'k_2','logSn_2','logSp_2','logk_2','bandgap_2']
             }
-        if trainParameters!=None:
+        if trainParameters!=None: # if there is training parameters input, update the training parameters with the input ones
             for key in trainParameters.keys(): trainParam[key]=trainParameters[key]
-        if trainParam['bandgap'] not in ['all','upper','lower']: raise ValueError('bandgap parameter must be all, lower or upper')
+        if trainParam['bandgap'] not in ['all','upper','lower']: raise ValueError('bandgap parameter must be all, lower or upper') # if the bandgap is not an expected value, raise the error.
         trainKey = targetCol+"_"+trainParam['bandgap']
         self.logTrain[trainKey]={
             'target_col':targetCol,
@@ -140,7 +143,7 @@ class ML():
         Logger.printDic(trainParam)
         if self.parameters['logML']: self.logger.close()
 
-        #   Normalize dataset
+        #   Normalize dataset: normalize for training set using MinMaxScaler()
         if trainParam['normalize']:
             scaler_dict = {}
             for col in self.dataset.columns:
@@ -154,25 +157,25 @@ class ML():
         self.logTrain[trainKey]['scaler']=scaler_dict
         #   Prepare Dataset for training
         specify="" if 'bandgap' in trainParam['non-feature_col'] else "_"+targetCol.rsplit('_',1)[-1]
-        if  trainParam['bandgap'] == 'upper': dfAll = dfAll.loc[dfAll['bandgap'+specify]==1]
-        if  trainParam['bandgap'] == 'lower': dfAll = dfAll.loc[dfAll['bandgap'+specify]==0]
+        if  trainParam['bandgap'] == 'upper': dfAll = dfAll.loc[dfAll['bandgap'+specify]==1] # if bandgap is upper, then replayce it with 1
+        if  trainParam['bandgap'] == 'lower': dfAll = dfAll.loc[dfAll['bandgap'+specify]==0] # otherwise 0
         dfTrain, dfVal = train_test_split(dfAll, test_size=trainParam['validation_fraction'],random_state=trainParam['random_seed'])
         # xTrain = dfTrain.drop(["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap'],axis =1)
         # xTrain = dfTrain.drop(["Name","Et_eV_1","Sn_cm2_1","Sp_cm2_1",'k_1','logSn_1','logSp_1','logk_1','bandgap_1',"Et_eV_2","Sn_cm2_2","Sp_cm2_2",'k_2','logSn_2','logSp_2','logk_2','bandgap_2'],axis =1)
         # xTrain = dfTrain.drop(["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap','CMn','CPn','CMp','CPp'],axis =1)
         xTrain = dfTrain.drop(trainParam['non-feature_col'],axis =1)
-        xVal = dfVal.drop(trainParam['non-feature_col'],axis =1)
+        xVal = dfVal.drop(trainParam['non-feature_col'],axis =1) # X test.
         # xVal = dfVal.drop(["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap'],axis =1)
         # xVal = dfVal.drop(["Name","Et_eV_1","Sn_cm2_1","Sp_cm2_1",'k_1','logSn_1','logSp_1','logk_1','bandgap_1',"Et_eV_2","Sn_cm2_2","Sp_cm2_2",'k_2','logSn_2','logSp_2','logk_2','bandgap_2'],axis =1)
         # xVal = dfVal.drop(["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap','CMn','CPn','CMp','CPp'],axis =1)
         yTrain = dfTrain[targetCol]
-        yVal = dfVal[targetCol]
+        yVal = dfVal[targetCol] # y_test
 
         #   Train model
         if self.parameters['logML']: self.logger.open()
         Logger.printTitle('VERBOSE',titleLen=40)
         model = trainParam['base_model']
-        training_start_time = time.time()
+        training_start_time = time.time() # record the time as well
         model.fit(xTrain,yTrain)
         training_end_time =time.time()
         self.logTrain[trainKey]['model'] = model
@@ -197,6 +200,7 @@ class ML():
             "training_rmse":"{:.2e}".format(np.sqrt(mean_squared_error(actTrain,predTrain))),
             "validation_rmse":"{:.2e}".format(np.sqrt(mean_squared_error(actVal,predVal))),
         }
+        # for the regression task: we use R2 score and mean squared error for evaluation
 
         #   Log results
         if self.parameters['logML']: self.logger.open()
@@ -224,7 +228,7 @@ class ML():
         trainParam={
             'validation_fraction': 0.1,    # validation dataset percentage
             'normalize': True,     # Wether or not to normalize the input data (Must be True for NN)
-            'base_model': MLPClassifier((1024,128),alpha=0.001, activation = 'relu', learning_rate='adaptive', verbose=1),
+            'base_model': MLPClassifier((1024,128),alpha=0.001, activation = 'relu', learning_rate='adaptive', verbose=1), # neural network.
             'random_seed': np.random.randint(1000),
             'bandgap': 'all', #or 'upper' == Et>0 or 'lower' ==Et<0
             'non-feature_col':["Name","Et_eV","Sn_cm2","Sp_cm2",'k','logSn','logSp','logk','bandgap','CMn','CPn','CMp','CPp'],
