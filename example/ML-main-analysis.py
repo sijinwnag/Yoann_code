@@ -68,7 +68,7 @@ PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML': False,   #   Log the output of the console to a text file
-    'n_defects': 8000, # Size of simulated defect data set for machine learning
+    'n_defects': 100, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
     'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
     'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on
