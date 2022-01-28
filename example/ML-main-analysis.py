@@ -46,18 +46,18 @@ NAME = 'Main' # Name of the experiment.
 
 #   File specific inputs
 ML_REGRESSION_PIPELINE={
-    "Random Forest": RandomForestRegressor(n_estimators=100, verbose =2, n_jobs=-1),
+    "Random Forest": RandomForestRegressor(n_estimators=100, verbose =0, n_jobs=-1),
     "Adaptive Boosting": AdaBoostRegressor(base_estimator = DecisionTreeRegressor(), n_estimators=100, loss='linear'),
-    "Gradient Boosting": GradientBoostingRegressor(verbose=2,loss='ls',max_depth=10),
-    "Neural Network": MLPRegressor((100,100),alpha=0.001, activation = 'relu',verbose=2,learning_rate='adaptive'),
-    "Support Vector": SVR(kernel='rbf',C=5,verbose=2, gamma="auto"),
+    "Gradient Boosting": GradientBoostingRegressor(verbose=0,loss='ls',max_depth=10),
+    "Neural Network": MLPRegressor((100,100),alpha=0.001, activation = 'relu',verbose=0,learning_rate='adaptive'),
+    "Support Vector": SVR(kernel='rbf',C=5,verbose=0, gamma="auto"),
 }
 # the hyper parameters for regression models
 ML_CLASSIFICATION_PIPELINE={
-    "Random Forest": RandomForestClassifier(n_estimators=100, verbose =2,n_jobs=-1),
+    "Random Forest": RandomForestClassifier(n_estimators=100, verbose =0,n_jobs=-1),
     "Adaptive Boosting": AdaBoostClassifier(base_estimator = DecisionTreeClassifier(), n_estimators=10),
-    "Gradient Boosting": GradientBoostingClassifier(verbose=2,loss='deviance'),
-    "Neural Network": MLPClassifier((100,100),alpha=0.001, activation = 'relu',verbose=2,learning_rate='adaptive'),
+    "Gradient Boosting": GradientBoostingClassifier(verbose=0,loss='deviance'),
+    "Neural Network": MLPClassifier((100,100),alpha=0.001, activation = 'relu',verbose=0,learning_rate='adaptive'),
     "Nearest Neighbors":KNeighborsClassifier(n_neighbors = 5, weights='distance',n_jobs=-1),
 }
 # the hyper parameters for classification models
@@ -68,7 +68,7 @@ PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML': False,   #   Log the output of the console to a text file
-    'n_defects': 100, # Size of simulated defect data set for machine learning
+    'n_defects': 8000, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
     'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
     'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on
