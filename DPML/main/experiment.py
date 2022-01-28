@@ -523,7 +523,7 @@ class Experiment(): # define a new class
                 None
         '''
         self.logbook[logItem]=datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    def updateLogDataset(self,):
+    def updateLogDataset(self,logItem):
         '''
         ---Doc---
             Description:
