@@ -16,6 +16,7 @@ from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
 from sklearn.svm import SVR, SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier, MLPRegressor
+import os
 # %%-
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -39,7 +40,7 @@ from sklearn.neural_network import MLPClassifier, MLPRegressor
 # %%-
 
 # %%--  Inputs
-SAVEDIR = "Savedir_example\\" # create a folder that save the output for DPML
+SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example" # create a folder that save the output for DPML
 TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation (units are in K)
 DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation (units are in cm3)
 WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
@@ -81,6 +82,7 @@ PARAMETERS = {
 #---    Script
 #///////////////////////////////////////////
 # %%--  Define experiment and generate defect database
+# os.path.exists(SAVEDIR)
 exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS) # define an experiment by defining its save direction and the experiment parameters.
 exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING}) # set the wafer type, temperature, and the doping levels of the experiments.
 exp.generateDB() # generate the lifetime data for the given experiment
@@ -94,7 +96,10 @@ for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learni
         param={'bandgap':bandgapParam,'non-feature_col':PARAMETERS['non-feature_col'],'base_model':model}
         ml.trainRegressor(targetCol=targetCol, trainParameters=param)
         ml.plotRegressor(trainKey, plotParameters={'scatter_c':'black'})
-for modelName,model in ML_CLASSIFICATION_PIPELINE.items(): # this for loop is doing classification.
+for mod
+
+
+elName,model in ML_CLASSIFICATION_PIPELINE.items(): # this for loop is doing classification.
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName})
     for trainKey in exp.parameters['classification_training_keys']:
         targetCol, bandgapParam = trainKey.rsplit('_',1)
