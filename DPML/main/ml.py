@@ -402,6 +402,7 @@ class ML():
         if plotParam['show_yx']: ax.plot([np.min([df_Val.actual.min(),df_Val.predicted.min()]),np.max([df_Val.actual.max(),df_Val.predicted.max()])],[np.min([df_Val.actual.min(),df_Val.predicted.min()]),np.max([df_Val.actual.max(),df_Val.predicted.max()])],'k--')
         if plotParam['save']:   plt.savefig(self.pathDic['figures']+datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")+"Reg_"+trainKey+".png",transparent=True,bbox_inches='tight')
         plt.show()
+        return results['validation_r2']
     def printConfusionMatrix(self,trainKey, printParameters=None):
         '''
         ---Doc---
