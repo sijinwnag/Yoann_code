@@ -4,7 +4,7 @@
 # %%--  Imports
 import sys
 # import the function file from another folder:
-sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
 from Si import *
 from main import *
 from utils import *
@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 # %%-
 
 # %%--  Inputs
-SAVEDIR = "savedir_example\\"
+SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example"
 TEMPERATURE = [200,250,300,350,400]
 DOPING = [1e15,1e15,1e15,1e15,1e15]
 WAFERTYPE = 'p'
