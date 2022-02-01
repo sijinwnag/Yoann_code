@@ -89,7 +89,7 @@ exp.generateDB() # generate the lifetime data for the given experiment
 # %%-
 # %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
 # prepare an empty list to collect r2 score.
-r2_list = []
+# r2_list = []
 for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learning model and corresponding hyper parameters, this for loop is doing regression only
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName}) # use newML method defined in class experiment to set a maching learning ID.
     # prepare an emtpy list to collect r2
@@ -98,9 +98,9 @@ for modelName,model in ML_REGRESSION_PIPELINE.items(): # for each maching learni
         targetCol, bandgapParam = trainKey.rsplit('_',1)
         param={'bandgap':bandgapParam,'non-feature_col':PARAMETERS['non-feature_col'],'base_model':model}
         ml.trainRegressor(targetCol=targetCol, trainParameters=param)
-        r2_score = ml.plotRegressor(trainKey, plotParameters={'scatter_c':'black'})
-        r2_list_model.append(r2_score)
-    r2_list.append(r2_list)
+        ml.plotRegressor(trainKey, plotParameters={'scatter_c':'black'})
+        # r2_list_model.append(r2_score)
+    # r2_list.append(r2_list)
 for modelName,model in ML_CLASSIFICATION_PIPELINE.items(): # this for loop is doing classification.
     ml = exp.newML(mlParameters={'name':exp.parameters['name']+"_"+modelName})
     for trainKey in exp.parameters['classification_training_keys']:
