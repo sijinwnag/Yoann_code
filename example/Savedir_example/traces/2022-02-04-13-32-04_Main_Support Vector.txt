@@ -1,0 +1,97 @@
+=============================== Main_Support Vector ==============================
+====================== HYPER-PARAMETERS ======================
+===== PARAMETERS =====
+
+
+	 name -- > Main_Support Vector
+	 save -- > True
+	 logML - > True
+	 mlID -- > 4
+
+
+======== PATH ========
+
+
+	 savedir - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example
+	 figures - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\figures\
+	 objects - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\objects\
+	 traces -- > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\
+	 outputs - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\outputs\
+	 logfile - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\2022-02-04-13-32-04_Main_Support Vector.txt
+
+
+================== TRAINING-REG_Et_eV_upper ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > SVR(C=5, gamma='auto', verbose=0)
+	 random_seed --------- > 738
+	 bandgap ------------- > upper
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.00 s
+	 training_r2 ----- > 0.281
+	 validation_r2 --- > nan
+	 training_rmse --- > 1.00e-01
+	 validation_rmse - > 5.03e-02
+
+
+================== TRAINING-REG_Et_eV_lower ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > SVR(C=5, gamma='auto', verbose=0)
+	 random_seed --------- > 369
+	 bandgap ------------- > lower
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.00 s
+	 training_r2 ----- > 0.759
+	 validation_r2 --- > nan
+	 training_rmse --- > 9.15e-02
+	 validation_rmse - > 2.66e-02
+
+
+==================== TRAINING-REG_logk_all ===================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > SVR(C=5, gamma='auto', verbose=0)
+	 random_seed --------- > 246
+	 bandgap ------------- > all
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.00 s
+	 training_r2 ----- > 0.870
+	 validation_r2 --- > nan
+	 training_rmse --- > 3.31e-01
+	 validation_rmse - > 3.54e+00
+
+

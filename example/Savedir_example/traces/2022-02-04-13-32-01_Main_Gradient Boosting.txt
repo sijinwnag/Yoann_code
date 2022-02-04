@@ -1,0 +1,97 @@
+============================= Main_Gradient Boosting =============================
+====================== HYPER-PARAMETERS ======================
+===== PARAMETERS =====
+
+
+	 name -- > Main_Gradient Boosting
+	 save -- > True
+	 logML - > True
+	 mlID -- > 2
+
+
+======== PATH ========
+
+
+	 savedir - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example
+	 figures - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\figures\
+	 objects - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\objects\
+	 traces -- > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\
+	 outputs - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\outputs\
+	 logfile - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\2022-02-04-13-32-01_Main_Gradient Boosting.txt
+
+
+================== TRAINING-REG_Et_eV_upper ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > GradientBoostingRegressor(loss='ls', max_depth=10)
+	 random_seed --------- > 795
+	 bandgap ------------- > upper
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.03 s
+	 training_r2 ----- > 1.000
+	 validation_r2 --- > nan
+	 training_rmse --- > 2.40e-06
+	 validation_rmse - > 1.32e-01
+
+
+================== TRAINING-REG_Et_eV_lower ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > GradientBoostingRegressor(loss='ls', max_depth=10)
+	 random_seed --------- > 656
+	 bandgap ------------- > lower
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.02 s
+	 training_r2 ----- > 1.000
+	 validation_r2 --- > nan
+	 training_rmse --- > 3.66e-06
+	 validation_rmse - > 2.51e-01
+
+
+==================== TRAINING-REG_logk_all ===================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > GradientBoostingRegressor(loss='ls', max_depth=10)
+	 random_seed --------- > 515
+	 bandgap ------------- > all
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 0.04 s
+	 training_r2 ----- > 1.000
+	 validation_r2 --- > nan
+	 training_rmse --- > 3.69e-05
+	 validation_rmse - > 6.54e-01
+
+

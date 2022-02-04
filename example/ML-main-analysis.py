@@ -4,12 +4,13 @@
 # %%--  Imports
 import sys
 # import the function file from another folder:
-# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
-sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
 from Si import *
 from main import *
 from utils import *
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
 from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
@@ -40,8 +41,8 @@ import os
 # %%-
 
 # %%--  Inputs
-# SAVEDIR = r"C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example"
-SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example" # create a folder that save the output for DPML
+SAVEDIR = r"C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example"
+# SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example" # create a folder that save the output for DPML
 TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation (units are in K)
 DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation (units are in cm3)
 WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
@@ -69,9 +70,9 @@ ML_CLASSIFICATION_PIPELINE={
 # %%--  Hyper-parameters of the experiment
 PARAMETERS = {
     'name': NAME,
-    'save': False,   # True to save a copy of the printed log, the outputed model and data
-    'logML': False,   #   Log the output of the console to a text file
-    'n_defects': 8000, # Size of simulated defect data set for machine learning
+    'save': True,   # True to save a copy of the printed log, the outputed model and data
+    'logML': True,   #   Log the output of the console to a text file
+    'n_defects': 8, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
     'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
     'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on
@@ -84,9 +85,14 @@ PARAMETERS = {
 #///////////////////////////////////////////
 # %%--  Define experiment and generate defect database
 # os.path.exists(SAVEDIR)
-exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS) # define an experiment by defining its save direction and the experiment parameters.
+exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS) # define an experiment by defining its save direction and the experiment parameters
 exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING}) # set the wafer type, temperature, and the doping levels of the experiments.
-exp.generateDB() # generate the lifetime data for the given experiment
+# exp.generateDB() # generate the lifetime data for the given experiment
+# load previous experiment if possible
+ltsDF = pd.read_csv(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\outputs\2022-02-01-12-07-56_Main_datasetID_0.csv')
+# ltsDF=LoadObj(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\objects\\','ltsDF_ID0_2022-02-04-13-20-20.pkl')
+exp.uploadDB(ltsDF)
+%whos
 # %%-
 # %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
 # prepare an empty list to collect r2 score.

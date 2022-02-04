@@ -1,0 +1,84 @@
+=============================== Main_Random Forest ===============================
+====================== HYPER-PARAMETERS ======================
+===== PARAMETERS =====
+
+
+	 name -- > Main_Random Forest
+	 save -- > True
+	 logML - > True
+	 mlID -- > 5
+
+
+======== PATH ========
+
+
+	 savedir - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example
+	 figures - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\figures\
+	 objects - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\objects\
+	 traces -- > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\
+	 outputs - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\outputs\
+	 logfile - > C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\traces\2022-02-04-13-36-55_Main_Random Forest.txt
+
+
+================== TRAINING-REG_Et_eV_upper ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > RandomForestRegressor(n_jobs=-1)
+	 random_seed --------- > 454
+	 bandgap ------------- > upper
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 9.68 s
+	 training_r2 ----- > 0.994
+	 validation_r2 --- > 0.957
+	 training_rmse --- > 1.08e-02
+	 validation_rmse - > 2.87e-02
+
+
+================== TRAINING-REG_Et_eV_lower ==================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > RandomForestRegressor(n_jobs=-1)
+	 random_seed --------- > 740
+	 bandgap ------------- > lower
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
+================= VERBOSE ================
+
+
+================= RESULTS ================
+
+
+	 training_time --- > 10.02 s
+	 training_r2 ----- > 0.997
+	 validation_r2 --- > 0.982
+	 training_rmse --- > 7.58e-03
+	 validation_rmse - > 1.92e-02
+
+
+==================== TRAINING-REG_logk_all ===================
+=============== PARAMETERS ===============
+
+
+	 validation_fraction - > 0.1
+	 normalize ----------- > True
+	 base_model ---------- > RandomForestRegressor(n_jobs=-1)
+	 random_seed --------- > 103
+	 bandgap ------------- > all
+	 non-feature_col ----- > ['Name', 'Et_eV', 'Sn_cm2', 'Sp_cm2', 'k', 'logSn', 'logSp', 'logk', 'bandgap']
+
+
