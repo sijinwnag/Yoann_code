@@ -93,7 +93,7 @@ exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING
 ltsDF = pd.read_csv(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\outputs\2022-02-01-12-07-56_Main_datasetID_0.csv')
 # ltsDF=LoadObj(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_example\objects\\','ltsDF_ID0_2022-02-04-13-20-20.pkl')
 exp.uploadDB(ltsDF)
-%whos
+# %whos
 # %%-
 # %%--  Train machine learning algorithms loop: to into experiment file in DPML/main/experiment to see what these codes are doing
 # prepare an empty list to collect r2 score.
