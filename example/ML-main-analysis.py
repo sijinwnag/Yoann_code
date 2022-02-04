@@ -45,6 +45,7 @@ SAVEDIR = r"C:\Users\sijin wang\Documents\GitHub\Yoann_code\example\Savedir_exam
 # SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example" # create a folder that save the output for DPML
 TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation (units are in K)
 DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation (units are in cm3)
+
 WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
 NAME = 'Main' # Name of the experiment.
 
@@ -83,7 +84,7 @@ PARAMETERS = {
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 #---    Script
 #///////////////////////////////////////////
-# %%--  Define experiment and generate defect database
+# %%--  Define experiment and generate defect database (or load database)
 # os.path.exists(SAVEDIR)
 exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS) # define an experiment by defining its save direction and the experiment parameters
 exp.updateParameters({'type':WAFERTYPE,'temperature':TEMPERATURE,'doping':DOPING}) # set the wafer type, temperature, and the doping levels of the experiments.
