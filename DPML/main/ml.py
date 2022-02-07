@@ -1,7 +1,8 @@
 "Machine learning functions associated to SRH parameter extraction"
 import sys
 # import the function file from another folder:
-sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
 from utils.matplotlibstyle import *
 from utils import SaveObj, LoadObj
 from utils import Logger
