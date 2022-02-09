@@ -3,9 +3,11 @@
 #///////////////////////////////////////////
 # %%--  Imports
 import sys
-sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import *
-sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
+# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
 from DPML import *
 import numpy as np
 import matplotlib.pyplot as plt
@@ -88,8 +90,8 @@ PARAM={
         'noise':'',             #   Enable noiseparam
         'noiseparam':0,         #   Adds noise proportional to the log of Delta n
 }
-db_multi=DPML.generateDB_multi(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM)
-db_sah=DPML.generateDB_sah(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM)
+db_multi=DPML.generateDB_multi(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # two one-level defect data
+db_sah=DPML.generateDB_sah(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # one two-level defect data
 db_multi['Mode']=['Two one-level']*len(db_multi)
 db_sah['Mode']=['Single two-level']*len(db_sah)
 dataDf=pd.concat([db_multi,db_sah])
