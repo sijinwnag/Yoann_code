@@ -46,10 +46,10 @@ from torchvision import datasets, models, transforms
 # %%-
 
 # %%--  Inputs
-SAVEDIR = "savedir_example\\"
+SAVEDIR = "savedir_example\\" # you can change this to your own path
 FILEPATH = "advanced_example\\data\\sample_original_L.csv"
-TEMPERATURE = [158,182,206,230,254,278,300]
-DOPING = [1.01e16]*len(TEMPERATURE)
+TEMPERATURE = [158,182,206,230,254,278,300] # below 400K
+DOPING = [1.01e16]*len(TEMPERATURE) # make sure T and doping have same length
 WAFERTYPE = 'p'
 NAME = 'advanced example - multi_level_L'
 # %%-
