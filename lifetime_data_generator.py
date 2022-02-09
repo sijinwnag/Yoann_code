@@ -1,10 +1,10 @@
 # %%-- Imports
 import sys
-# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
-sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import *
-# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
-sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
+sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
+# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
 from DPML import *
 import numpy as np
 import matplotlib.pyplot as plt
