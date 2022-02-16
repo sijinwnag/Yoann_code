@@ -1,7 +1,7 @@
 # %%-- Imports
 import sys
-sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
-# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
 from Si import *
 sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
 # sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
@@ -50,7 +50,9 @@ PARAM={
 exp = Experiment(SaveDir=SAVEDIR, Parameters=PARAMETERS)
 # %%-
 
-# %%--  Simulate datasets: for a mixture of Two one-level and Single two-level
+# %%-- Data simulation:
+
+# %%--  Simulate datasets: for a mixture of Two one-level and Single two-level, run this section
 db_multi=DPML.generateDB_multi(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # two one-level defect data
 db_sah=DPML.generateDB_sah(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # one two-level defect data
 db_multi['Mode']=['Two one-level']*len(db_multi)
@@ -64,7 +66,7 @@ vocab={
 }
 # %%-
 
-# %%--  Simulate datasets: for Single two-level
+# %%--  Simulate datasets: for Single two-level, run this section
 db_multi=DPML.generateDB_multi(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # two one-level defect data
 db_multi['Mode']=['Two one-level']*len(db_multi)
 dataDf = db_multi
@@ -76,7 +78,7 @@ vocab={
 }
 # %%-
 
-# %%-- Simualate datasets: for Two one-level
+# %%-- Simualate datasets: for Two one-level, run this section
 db_sah=DPML.generateDB_sah(PARAMETERS['n_defects'], TEMPERATURE, DOPING, PARAMETERS['dn_range'], PARAM) # one two-level defect data
 db_sah['Mode']=['Single two-level']*len(db_sah)
 dataDf=db_sah
@@ -86,6 +88,8 @@ vocab={
     '0':'Two one-level',
     '1':'Single two-level',
 }
+# %%-
+
 # %%-
 
 # %%--  Export data
