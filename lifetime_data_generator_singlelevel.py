@@ -1,8 +1,8 @@
 # %%--  Imports
 import sys
 # import the function file from another folder:
-# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
-sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
+sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+# sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
 from Si import *
 from main import *
 from utils import *
@@ -18,19 +18,19 @@ import os
 # %%-
 
 # %%--  Inputs
-SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\Savedir_example"
+SAVEDIR = r"C:\Users\sijin wang\Documents\GitHub\Yoann_code\Savedir_example"
 # SAVEDIR = r"C:\Users\budac\Documents\GitHub\Yoann_code\example\Savedir_example" # create a folder that save the output for DPML
 TEMPERATURE = [200,250,300,350,400] # define a list of temperature for lifetime data generation (units are in K), the code will not work if your temperature is above 400K
 DOPING = [1e15,1e15,1e15,1e15,1e15] # define a list of doping levels for lifetime data generation (units are in cm3)
-
 WAFERTYPE = 'p' # defien the doping type of the wafer for lifetime data generation
 NAME = 'Main' # Name of the experiment.
+# %%-
 # %%--  Hyper-parameters of the experiment
 PARAMETERS = {
     'name': NAME,
     'save': False,   # True to save a copy of the printed log, the outputed model and data
     'logML': False,   #   Log the output of the console to a text file
-    'n_defects': 8000, # Size of simulated defect data set for machine learning
+    'n_defects': 8, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on, dn is the excess carrier concentration
     'classification_training_keys': ['bandgap_all'], # for  prediction: the name of the columns in dataset that we are going to do classification on
     'regression_training_keys': ['Et_eV_upper','Et_eV_lower','logk_all'], # for prediction: the name of the columns in dataset that we are going to do regression on

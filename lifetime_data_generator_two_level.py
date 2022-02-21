@@ -1,8 +1,8 @@
 # %%-- Imports
 import sys
 # sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code\DPML')
-sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
-from Si import *
+# sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code\DPML')
+# from Si import *
 sys.path.append(r'C:\Users\budac\Documents\GitHub\Yoann_code')
 # sys.path.append(r'C:\Users\sijin wang\Documents\GitHub\Yoann_code')
 from DPML import *
@@ -25,7 +25,7 @@ PARAMETERS = {
     'name': NAME,
     'save': True,   # True to save a copy of the printed log, the outputed model and data
     'logML':True,   #   Log the output of the console to a text file
-    'n_defects': 100, # Size of simulated defect data set for machine learning
+    'n_defects': 1, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on
     'non-feature_col':['Mode','Label',"Name","Et_eV_1","Sn_cm2_1","Sp_cm2_1",'k_1','logSn_1','logSp_1','logk_1','bandgap_1',"Et_eV_2","Sn_cm2_2","Sp_cm2_2",'k_2','logSn_2','logSp_2','logk_2','bandgap_2']
 }
