@@ -14,7 +14,7 @@ import pandas as pd
 # %%--  Inputs
 SAVEDIR = "savedir_example\\" # you can change this to your own path
 FILEPATH = "advanced_example\\data\\sample_original_L.csv"
-TEMPERATURE = [158,182,206,230,254,278,300] # below 400K
+TEMPERATURE = [150, 200, 250, 300, 350, 400] # below 400K
 DOPING = [1.01e16]*len(TEMPERATURE) # make sure T and doping have same length
 WAFERTYPE = 'p'
 NAME = 'advanced example - multi_level_L'
@@ -25,7 +25,7 @@ PARAMETERS = {
     'name': NAME,
     'save': True,   # True to save a copy of the printed log, the outputed model and data
     'logML':True,   #   Log the output of the console to a text file
-    'n_defects': 1, # Size of simulated defect data set for machine learning
+    'n_defects': 8000, # Size of simulated defect data set for machine learning
     'dn_range' : np.logspace(13,17,100),# Number of points to interpolate the curves on
     'non-feature_col':['Mode','Label',"Name","Et_eV_1","Sn_cm2_1","Sp_cm2_1",'k_1','logSn_1','logSp_1','logk_1','bandgap_1',"Et_eV_2","Sn_cm2_2","Sp_cm2_2",'k_2','logSn_2','logSp_2','logk_2','bandgap_2']
 }
